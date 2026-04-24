@@ -20,6 +20,7 @@ const eslintConfig = defineConfig([
   {
     rules: {
       '@stylistic/comma-dangle': ['error', 'never'],
+      '@stylistic/jsx-one-expression-per-line': 'off',
       '@stylistic/jsx-quotes': ['error', 'prefer-single'],
       '@stylistic/operator-linebreak': ['error', 'after', { overrides: { '?': 'before', ':': 'before' } }]
     }
