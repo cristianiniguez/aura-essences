@@ -53,7 +53,6 @@ export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decan
             variant={selection === 'bottle' ? 'default' : 'outline'}
             size='sm'
             onClick={() => setSelection('bottle')}
-            className='rounded-full'
           >
             Whole Bottle — Bs. {bottlePrice}
           </Button>
@@ -64,7 +63,6 @@ export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decan
               variant={selection === d.capacity ? 'default' : 'outline'}
               size='sm'
               onClick={() => setSelection(d.capacity)}
-              className='rounded-full'
             >
               {d.capacity}ml — Bs. {d.price}
             </Button>
@@ -72,7 +70,7 @@ export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decan
         </div>
       </div>
 
-      <Button onClick={handleAddToCart} className='w-full sm:w-auto rounded-full px-8'>
+      <Button onClick={handleAddToCart} className='w-full sm:w-auto px-8'>
         {added ? 'Added to cart!' : 'Add to cart'}
       </Button>
     </div>

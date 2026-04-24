@@ -40,7 +40,7 @@ export default async function PerfumePage({ params }: { params: Promise<{ slug: 
         </Link>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-start'>
-          <div className='relative aspect-square rounded-2xl overflow-hidden bg-muted'>
+          <div className='relative aspect-square overflow-hidden bg-muted'>
             {imageUrl
               ? (
                   <Image

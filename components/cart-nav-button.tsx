@@ -14,7 +14,7 @@ export function CartNavButton() {
       <Link href='/cart'>
         <ShoppingBag className='w-5 h-5' />
         {totalItems > 0 && (
-          <Badge className='absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 text-[10px] flex items-center justify-center'>
+          <Badge className='absolute -top-1 -right-1 size-4 px-0 text-[10px] flex items-center justify-center'>
             {totalItems}
           </Badge>
         )}

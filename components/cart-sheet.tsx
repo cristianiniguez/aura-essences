@@ -40,7 +40,7 @@ export function CartSheet() {
         <Button variant='ghost' size='icon' className='relative'>
           <ShoppingBag className='w-5 h-5' />
           {totalItems > 0 && (
-            <Badge className='absolute -top-1 -right-1 min-w-[18px] h-[18px] px-1 text-[10px] flex items-center justify-center'>
+            <Badge className='absolute -top-1 -right-1 size-4 px-0 text-[10px] flex items-center justify-center'>
               {totalItems}
             </Badge>
           )}
@@ -67,7 +67,7 @@ export function CartSheet() {
                 <ul className='flex-1 overflow-y-auto divide-y divide-border'>
                   {items.map(item => (
                     <li key={item.id} className='flex items-center gap-3 px-4 py-3'>
-                      <div className='relative w-14 h-14 rounded-lg overflow-hidden bg-muted shrink-0'>
+                      <div className='relative w-14 h-14 overflow-hidden bg-muted shrink-0'>
                         {item.imageUrl
                           ? (
                               <Image
@@ -130,7 +130,7 @@ export function CartSheet() {
                     <span className='text-lg font-bold text-foreground'>Bs. {subtotal}</span>
                   </div>
                   <Button
-                    className='w-full rounded-full gap-2'
+                    className='w-full gap-2'
                     asChild
                   >
                     <a

@@ -28,7 +28,7 @@ export function PerfumeCard({ name, slug, image, bottlePrice, decants }: Perfume
   return (
     <Link
       href={`/perfumes/${slug.current}`}
-      className='group flex flex-col rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition-shadow duration-200'
+      className='group flex flex-col overflow-hidden border border-border bg-card hover:shadow-lg transition-shadow duration-200'
     >
       <div className='relative aspect-square bg-muted'>
         {imageUrl
