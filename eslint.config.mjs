@@ -22,6 +22,7 @@ const eslintConfig = defineConfig([
   ]),
   {
     rules: {
+      '@stylistic/arrow-parens': ['error', 'as-needed'],
       '@stylistic/comma-dangle': ['error', 'never'],
       '@stylistic/jsx-one-expression-per-line': 'off',
       '@stylistic/jsx-quotes': ['error', 'prefer-single'],

@@ -1,7 +1,7 @@
 import { sanityFetch } from '@/sanity/lib/live'
 import { allPerfumesQuery } from '@/sanity/lib/queries'
 import { PerfumeCard } from '@/components/perfume-card'
-import { CartNavButton } from '@/components/cart-nav-button'
+import { CartSheet } from '@/components/cart-sheet'
 
 export default async function HomePage() {
   const { data: perfumes } = await sanityFetch({ query: allPerfumesQuery })
@@ -11,7 +11,7 @@ export default async function HomePage() {
       <header className='sticky top-0 z-10 bg-card border-b border-border'>
         <div className='max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between'>
           <span className='text-xl font-semibold tracking-tight text-foreground'>Aura Essences</span>
-          <CartNavButton />
+          <CartSheet />
         </div>
       </header>
 

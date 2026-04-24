@@ -6,7 +6,7 @@ import { client } from '@/sanity/lib/client'
 import { allPerfumeSlugsQuery, perfumeBySlugQuery } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import { AddToCartSection } from '@/components/add-to-cart-section'
-import { CartNavButton } from '@/components/cart-nav-button'
+import { CartSheet } from '@/components/cart-sheet'
 
 export async function generateStaticParams() {
   const perfumes = await client.fetch(allPerfumeSlugsQuery)
@@ -30,7 +30,7 @@ export default async function PerfumePage({ params }: { params: Promise<{ slug: 
           <Link href='/' className='text-xl font-semibold tracking-tight text-foreground hover:text-muted-foreground transition-colors'>
             Aura Essences
           </Link>
-          <CartNavButton />
+          <CartSheet />
         </div>
       </header>
 
