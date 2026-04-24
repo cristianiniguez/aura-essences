@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/lib/cart-context'
+import { useT } from '@/app/i18n/client'
 
 type Decant = { _key?: string, capacity: number, price: number }
 
@@ -16,6 +17,7 @@ type AddToCartSectionProps = {
 
 export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decants }: AddToCartSectionProps) {
   const { addItem } = useCart()
+  const { t } = useT()
   const [selection, setSelection] = useState<'bottle' | number>('bottle')
   const [added, setAdded] = useState(false)
 
@@ -47,14 +49,14 @@ export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decan
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
-        <span className='text-sm font-medium text-foreground'>Select option</span>
+        <span className='text-sm font-medium text-foreground'>{t('addToCart.selectOption')}</span>
         <div className='flex flex-wrap gap-2'>
           <Button
             variant={selection === 'bottle' ? 'default' : 'outline'}
             size='sm'
             onClick={() => setSelection('bottle')}
           >
-            Whole Bottle — Bs. {bottlePrice}
+            {t('addToCart.wholeBottle', { price: bottlePrice })}
           </Button>
 
           {decants?.map(d => (
@@ -64,14 +66,14 @@ export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decan
               size='sm'
               onClick={() => setSelection(d.capacity)}
             >
-              {d.capacity}ml — Bs. {d.price}
+              {t('addToCart.decantOption', { capacity: d.capacity, price: d.price })}
             </Button>
           ))}
         </div>
       </div>
 
       <Button onClick={handleAddToCart} className='w-full sm:w-auto px-8'>
-        {added ? 'Added to cart!' : 'Add to cart'}
+        {added ? t('addToCart.added') : t('addToCart.addToCart')}
       </Button>
     </div>
   )

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { urlFor } from '@/sanity/lib/image'
+import { getT } from '@/app/i18n'
 
 type Decant = { capacity: number, price: number }
 
@@ -11,9 +12,11 @@ type PerfumeCardProps = {
   image?: { asset?: { _ref: string } }
   bottlePrice: number
   decants?: Decant[]
+  locale: string
 }
 
-export function PerfumeCard({ name, slug, image, bottlePrice, decants }: PerfumeCardProps) {
+export async function PerfumeCard({ name, slug, image, bottlePrice, decants, locale }: PerfumeCardProps) {
+  const { t } = await getT()
   const imageUrl = image ? urlFor(image).width(600).height(600).fit('crop').url() : null
 
   const decantPriceRange = decants && decants.length > 0
@@ -27,7 +30,7 @@ export function PerfumeCard({ name, slug, image, bottlePrice, decants }: Perfume
 
   return (
     <Link
-      href={`/perfumes/${slug.current}`}
+      href={`/${locale}/perfumes/${slug.current}`}
       className='group flex flex-col overflow-hidden border border-border bg-card hover:shadow-lg transition-shadow duration-200'
     >
       <div className='relative aspect-square bg-muted'>
@@ -43,16 +46,16 @@ export function PerfumeCard({ name, slug, image, bottlePrice, decants }: Perfume
             )
           : (
               <div className='w-full h-full flex items-center justify-center text-muted-foreground text-sm'>
-                No image
+                {t('perfumeCard.noImage')}
               </div>
             )}
       </div>
 
       <div className='flex flex-col gap-1 p-4'>
         <h2 className='font-semibold text-card-foreground leading-snug line-clamp-2'>{name}</h2>
-        <p className='text-sm text-muted-foreground'>Bottle — Bs. {bottlePrice}</p>
+        <p className='text-sm text-muted-foreground'>{t('perfumeCard.bottle')} — Bs. {bottlePrice}</p>
         {decantPriceRange && (
-          <p className='text-sm text-muted-foreground'>Decant — {decantPriceRange}</p>
+          <p className='text-sm text-muted-foreground'>{t('perfumeCard.decant')} — {decantPriceRange}</p>
         )}
       </div>
     </Link>

@@ -13,26 +13,30 @@ import {
   SheetTrigger
 } from '@/components/ui/sheet'
 import { useCart } from '@/lib/cart-context'
+import { useT } from '@/app/i18n/client'
 
 const WHATSAPP_NUMBER = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER ?? ''
 
-function buildWhatsAppUrl(items: ReturnType<typeof useCart>['items'], subtotal: number) {
-  const lines = items.map(item => {
-    const variant = item.type === 'bottle' ? 'Frasco completo' : `Decant ${item.capacity}ml`
-    return `• ${item.name} (${variant}) x${item.quantity} — Bs. ${item.price * item.quantity}`
-  })
-  const message = [
-    'Hola! Quiero realizar el siguiente pedido:',
-    '',
-    ...lines,
-    '',
-    `*Total: Bs. ${subtotal}*`
-  ].join('\n')
-  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
-}
-
 export function CartSheet() {
   const { items, removeItem, updateQuantity, clearCart, totalItems, subtotal } = useCart()
+  const { t } = useT()
+
+  function buildWhatsAppUrl() {
+    const lines = items.map(item => {
+      const variant = item.type === 'bottle'
+        ? t('whatsApp.wholeBottle')
+        : t('whatsApp.decant', { capacity: item.capacity })
+      return `• ${item.name} (${variant}) x${item.quantity} — Bs. ${item.price * item.quantity}`
+    })
+    const message = [
+      t('whatsApp.greeting'),
+      '',
+      ...lines,
+      '',
+      `*${t('whatsApp.total')}: Bs. ${subtotal}*`
+    ].join('\n')
+    return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`
+  }
 
   return (
     <Sheet>
@@ -44,14 +48,14 @@ export function CartSheet() {
               {totalItems}
             </Badge>
           )}
-          <span className='sr-only'>Cart ({totalItems} items)</span>
+          <span className='sr-only'>{t('cart.ariaLabel', { count: totalItems })}</span>
         </Button>
       </SheetTrigger>
 
       <SheetContent side='right' className='flex flex-col p-0 gap-0'>
         <SheetHeader className='border-b border-border px-4 py-4'>
           <SheetTitle className='text-base font-semibold'>
-            Tu carrito {totalItems > 0 && <span className='text-muted-foreground font-normal'>({totalItems})</span>}
+            {t('cart.title')} {totalItems > 0 && <span className='text-muted-foreground font-normal'>({totalItems})</span>}
           </SheetTitle>
         </SheetHeader>
 
@@ -59,7 +63,7 @@ export function CartSheet() {
           ? (
               <div className='flex flex-1 flex-col items-center justify-center gap-3 px-4 text-center'>
                 <ShoppingBag className='w-12 h-12 text-muted-foreground/40' />
-                <p className='text-muted-foreground text-sm'>Tu carrito está vacío.</p>
+                <p className='text-muted-foreground text-sm'>{t('cart.empty')}</p>
               </div>
             )
           : (
@@ -84,7 +88,9 @@ export function CartSheet() {
                       <div className='flex-1 min-w-0'>
                         <p className='font-medium text-sm text-foreground truncate'>{item.name}</p>
                         <p className='text-xs text-muted-foreground'>
-                          {item.type === 'bottle' ? 'Frasco completo' : `Decant ${item.capacity}ml`}
+                          {item.type === 'bottle'
+                            ? t('cart.wholeBottle')
+                            : t('cart.decant', { capacity: item.capacity })}
                           {' · '}Bs. {item.price}
                         </p>
                         <div className='flex items-center gap-1.5 mt-1.5'>
@@ -92,7 +98,7 @@ export function CartSheet() {
                             variant='outline'
                             size='icon-sm'
                             onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                            aria-label='Decrease quantity'
+                            aria-label={t('cart.decreaseQuantity')}
                           >
                             <Minus />
                           </Button>
@@ -101,7 +107,7 @@ export function CartSheet() {
                             variant='outline'
                             size='icon-sm'
                             onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                            aria-label='Increase quantity'
+                            aria-label={t('cart.increaseQuantity')}
                           >
                             <Plus />
                           </Button>
@@ -114,7 +120,7 @@ export function CartSheet() {
                           variant='ghost'
                           size='icon-sm'
                           onClick={() => removeItem(item.id)}
-                          aria-label='Remove item'
+                          aria-label={t('cart.removeItem')}
                           className='text-muted-foreground hover:text-destructive'
                         >
                           <Trash2 />
@@ -126,7 +132,7 @@ export function CartSheet() {
 
                 <SheetFooter className='border-t border-border px-4 py-4 gap-3'>
                   <div className='flex justify-between items-center w-full'>
-                    <span className='text-sm text-muted-foreground'>Subtotal</span>
+                    <span className='text-sm text-muted-foreground'>{t('cart.subtotal')}</span>
                     <span className='text-lg font-bold text-foreground'>Bs. {subtotal}</span>
                   </div>
                   <Button
@@ -134,12 +140,12 @@ export function CartSheet() {
                     asChild
                   >
                     <a
-                      href={buildWhatsAppUrl(items, subtotal)}
+                      href={buildWhatsAppUrl()}
                       target='_blank'
                       rel='noopener noreferrer'
                     >
                       <MessageCircle className='w-4 h-4' />
-                      Pedir por WhatsApp
+                      {t('cart.orderViaWhatsApp')}
                     </a>
                   </Button>
                   <Button
@@ -148,7 +154,7 @@ export function CartSheet() {
                     onClick={clearCart}
                     className='w-full text-muted-foreground'
                   >
-                    Vaciar carrito
+                    {t('cart.clearCart')}
                   </Button>
                 </SheetFooter>
               </>

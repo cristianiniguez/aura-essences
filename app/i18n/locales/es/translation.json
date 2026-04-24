@@ -1,0 +1,47 @@
+{
+  "home": {
+    "heading": "Nuestros Perfumes",
+    "empty": "No hay perfumes disponibles aún. Vuelve pronto."
+  },
+  "perfumeCard": {
+    "noImage": "Sin imagen",
+    "bottle": "Frasco",
+    "decant": "Decant"
+  },
+  "perfumePage": {
+    "backToAll": "← Volver a todos los perfumes",
+    "noImage": "Sin imagen"
+  },
+  "addToCart": {
+    "selectOption": "Selecciona una opción",
+    "wholeBottle": "Frasco completo — Bs. {{price}}",
+    "decantOption": "{{capacity}}ml — Bs. {{price}}",
+    "addToCart": "Agregar al carrito",
+    "added": "¡Agregado al carrito!"
+  },
+  "cart": {
+    "title": "Tu carrito",
+    "empty": "Tu carrito está vacío.",
+    "wholeBottle": "Frasco completo",
+    "decant": "Decant {{capacity}}ml",
+    "subtotal": "Subtotal",
+    "orderViaWhatsApp": "Pedir por WhatsApp",
+    "clearCart": "Vaciar carrito",
+    "ariaLabel": "Carrito ({{count}} artículos)",
+    "decreaseQuantity": "Disminuir cantidad",
+    "increaseQuantity": "Aumentar cantidad",
+    "removeItem": "Eliminar artículo"
+  },
+  "whatsApp": {
+    "greeting": "¡Hola! Quiero realizar el siguiente pedido:",
+    "wholeBottle": "Frasco completo",
+    "decant": "Decant {{capacity}}ml",
+    "total": "Total"
+  },
+  "metadata": {
+    "homeTitle": "Aura Essences",
+    "homeDescription": "Perfumes de lujo — frascos completos y decants",
+    "perfumeTitle": "{{name}} — Aura Essences",
+    "perfumeDescription": "Compra {{name}} en frasco completo o decant."
+  }
+}
