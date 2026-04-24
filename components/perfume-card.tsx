@@ -28,9 +28,9 @@ export function PerfumeCard({ name, slug, image, bottlePrice, decants }: Perfume
   return (
     <Link
       href={`/perfumes/${slug.current}`}
-      className='group flex flex-col rounded-2xl overflow-hidden border border-zinc-200 bg-white hover:shadow-lg transition-shadow duration-200'
+      className='group flex flex-col rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition-shadow duration-200'
     >
-      <div className='relative aspect-square bg-zinc-50'>
+      <div className='relative aspect-square bg-muted'>
         {imageUrl
           ? (
               <Image
@@ -42,17 +42,17 @@ export function PerfumeCard({ name, slug, image, bottlePrice, decants }: Perfume
               />
             )
           : (
-              <div className='w-full h-full flex items-center justify-center text-zinc-300 text-sm'>
+              <div className='w-full h-full flex items-center justify-center text-muted-foreground text-sm'>
                 No image
               </div>
             )}
       </div>
 
       <div className='flex flex-col gap-1 p-4'>
-        <h2 className='font-semibold text-zinc-900 leading-snug line-clamp-2'>{name}</h2>
-        <p className='text-sm text-zinc-500'>Bottle — Bs. {bottlePrice}</p>
+        <h2 className='font-semibold text-card-foreground leading-snug line-clamp-2'>{name}</h2>
+        <p className='text-sm text-muted-foreground'>Bottle — Bs. {bottlePrice}</p>
         {decantPriceRange && (
-          <p className='text-sm text-zinc-500'>Decant — {decantPriceRange}</p>
+          <p className='text-sm text-muted-foreground'>Decant — {decantPriceRange}</p>
         )}
       </div>
     </Link>

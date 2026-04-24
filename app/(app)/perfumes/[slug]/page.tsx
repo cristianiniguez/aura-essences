@@ -24,10 +24,10 @@ export default async function PerfumePage({ params }: { params: Promise<{ slug: 
     : null
 
   return (
-    <div className='min-h-screen bg-zinc-50'>
-      <header className='sticky top-0 z-10 bg-white border-b border-zinc-200'>
+    <div className='min-h-screen bg-background'>
+      <header className='sticky top-0 z-10 bg-card border-b border-border'>
         <div className='max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between'>
-          <Link href='/' className='text-xl font-semibold tracking-tight text-zinc-900 hover:text-zinc-600 transition-colors'>
+          <Link href='/' className='text-xl font-semibold tracking-tight text-foreground hover:text-muted-foreground transition-colors'>
             Aura Essences
           </Link>
           <CartNavButton />
@@ -35,12 +35,12 @@ export default async function PerfumePage({ params }: { params: Promise<{ slug: 
       </header>
 
       <main className='max-w-6xl mx-auto px-4 sm:px-6 py-12'>
-        <Link href='/' className='text-sm text-zinc-500 hover:text-zinc-800 transition-colors mb-8 inline-block'>
+        <Link href='/' className='text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 inline-block'>
           ← Back to all perfumes
         </Link>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-12 items-start'>
-          <div className='relative aspect-square rounded-2xl overflow-hidden bg-zinc-100'>
+          <div className='relative aspect-square rounded-2xl overflow-hidden bg-muted'>
             {imageUrl
               ? (
                   <Image
@@ -53,7 +53,7 @@ export default async function PerfumePage({ params }: { params: Promise<{ slug: 
                   />
                 )
               : (
-                  <div className='w-full h-full flex items-center justify-center text-zinc-300'>
+                  <div className='w-full h-full flex items-center justify-center text-muted-foreground'>
                     No image
                   </div>
                 )}
@@ -61,9 +61,9 @@ export default async function PerfumePage({ params }: { params: Promise<{ slug: 
 
           <div className='flex flex-col gap-6'>
             <div>
-              <h1 className='text-3xl font-bold text-zinc-900'>{perfume.name}</h1>
+              <h1 className='text-3xl font-bold text-foreground'>{perfume.name}</h1>
               {perfume.description && (
-                <p className='mt-3 text-zinc-600 leading-relaxed whitespace-pre-line'>
+                <p className='mt-3 text-muted-foreground leading-relaxed whitespace-pre-line'>
                   {perfume.description}
                 </p>
               )}

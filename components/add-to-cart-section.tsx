@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { Button } from '@/components/ui/button'
 import { useCart } from '@/lib/cart-context'
 
 type Decant = { _key?: string, capacity: number, price: number }
@@ -46,41 +47,34 @@ export function AddToCartSection({ perfumeId, name, imageUrl, bottlePrice, decan
   return (
     <div className='flex flex-col gap-4'>
       <div className='flex flex-col gap-2'>
-        <span className='text-sm font-medium text-zinc-700'>Select option</span>
+        <span className='text-sm font-medium text-foreground'>Select option</span>
         <div className='flex flex-wrap gap-2'>
-          <button
+          <Button
+            variant={selection === 'bottle' ? 'default' : 'outline'}
+            size='sm'
             onClick={() => setSelection('bottle')}
-            className={`px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
-              selection === 'bottle'
-                ? 'bg-zinc-900 text-white border-zinc-900'
-                : 'bg-white text-zinc-700 border-zinc-300 hover:border-zinc-500'
-            }`}
+            className='rounded-full'
           >
             Whole Bottle — Bs. {bottlePrice}
-          </button>
+          </Button>
 
           {decants?.map(d => (
-            <button
+            <Button
               key={d.capacity}
+              variant={selection === d.capacity ? 'default' : 'outline'}
+              size='sm'
               onClick={() => setSelection(d.capacity)}
-              className={`px-4 py-2 rounded-full border text-sm font-medium transition-colors ${
-                selection === d.capacity
-                  ? 'bg-zinc-900 text-white border-zinc-900'
-                  : 'bg-white text-zinc-700 border-zinc-300 hover:border-zinc-500'
-              }`}
+              className='rounded-full'
             >
               {d.capacity}ml — Bs. {d.price}
-            </button>
+            </Button>
           ))}
         </div>
       </div>
 
-      <button
-        onClick={handleAddToCart}
-        className='w-full sm:w-auto px-8 py-3 bg-zinc-900 text-white font-medium rounded-full hover:bg-zinc-700 transition-colors'
-      >
+      <Button onClick={handleAddToCart} className='w-full sm:w-auto rounded-full px-8'>
         {added ? 'Added to cart!' : 'Add to cart'}
-      </button>
+      </Button>
     </div>
   )
 }
