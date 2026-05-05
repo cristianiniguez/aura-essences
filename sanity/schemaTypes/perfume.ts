@@ -16,7 +16,14 @@ export const perfumeType = defineType({
       title: 'Slug',
       type: 'slug',
       options: { source: 'name' },
-      validation: Rule => Rule.required()
+      validation: Rule =>
+        Rule.required().custom(slug => {
+          const current = (slug as { current?: string })?.current
+          if (!current) return true
+          return /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(current)
+            ? true
+            : 'Slug may only contain lowercase letters, numbers, and hyphens (no spaces or special characters)'
+        }),
     }),
     defineField({
       name: 'description',
